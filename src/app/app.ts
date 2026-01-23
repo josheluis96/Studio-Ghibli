@@ -1,10 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
 import { Header } from "./core/layout/header/header";
-import {
-  TranslateService,
-
-} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-root',
@@ -14,11 +12,5 @@ import {
   standalone: true
 })
 export class App {
-  private translate = inject(TranslateService);
-  constructor() {
-    this.translate.addLangs(['es', 'en']);
-    this.translate.setFallbackLang('en');
-    this.translate.use('en');
-  }
   protected readonly title = signal('Studio-Ghibli');
 }
