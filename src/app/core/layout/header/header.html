@@ -2,13 +2,22 @@
     <p-toolbar>
         <ng-template #center>
             <div class=" flex items-center gap-2">
-                <p-button label="Files" text plain />
-                <p-button label="Edit" text plain />
-                <p-button label="View" text plain />
+                <!-- Se reemplazan los botones estáticos por los del menú de navegación -->
+                <!-- La directiva [label] usa el pipe 'translate' para buscar la clave en los ficheros i18n -->
+                <!-- routerLink permite navegar a la sección correspondiente -->
+                <p-button [label]="'MENU.FILMS' | translate" routerLink="/films" />
+                <p-button [label]="'MENU.PEOPLE' | translate" routerLink="/people" />
+                <p-button [label]="'MENU.LOCATIONS' | translate" routerLink="/locations" />
+                <p-button [label]="'MENU.SPECIES' | translate" routerLink="/species" />
+                <p-button [label]="'MENU.VEHICLES' | translate" routerLink="/vehicles" />
             </div>
         </ng-template>
         <ng-template #end>
             <div class="flex items-center gap-2">
+                <!-- Se añaden botones para cambiar el idioma, llaman a la función switchLang() -->
+                <p-button label="EN" (click)="switchLang('en')" [text]="translate.currentLang !== 'en'" />
+                <p-button label="ES" (click)="switchLang('es')" [text]="translate.currentLang !== 'es'" />
+
                 <p-avatar image="https://robohash.org/studio-ghibli" [style]="{ width: '32px', height: '32px' }" />
             </div>
         </ng-template>

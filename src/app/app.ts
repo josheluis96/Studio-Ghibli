@@ -3,7 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { Header } from "./core/layout/header/header";
-import { TranslateService } from '@ngx-translate/core';
+
+import {
+  TranslateService,
+  TranslatePipe,
+  TranslateDirective
+} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +20,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class App {
   private translate = inject(TranslateService);
   constructor() {
-    this.translate.addLangs(['de', 'en']);
+    this.translate.addLangs(['es', 'en']);
     this.translate.setFallbackLang('en');
     this.translate.use('en');
   }
