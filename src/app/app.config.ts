@@ -4,10 +4,10 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import Material from '@primeuix/themes/material';
-import { HttpClient,  provideHttpClient } from '@angular/common/http';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideHttpClient } from '@angular/common/http';
 
+import { provideTranslateService } from "@ngx-translate/core";
+import { provideTranslateHttpLoader } from "@ngx-translate/http-loader";
 
 
 
@@ -22,14 +22,13 @@ export const appConfig: ApplicationConfig = {
         preset: Material
       }
     }),
-    importProvidersFrom(
-      TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useFactory: (httpClient: HttpClient) => new TranslateHttpLoader(httpClient),
-          deps: [HttpClient],
-        }, defaultLanguage: 'en',
-      })
-    ),
+    provideTranslateService({
+      loader: provideTranslateHttpLoader({
+        prefix: '/assets/i18n/',
+        suffix: '.json'
+      }),
+      fallbackLang: 'en',
+      lang: 'en'
+    })
   ]
 };
