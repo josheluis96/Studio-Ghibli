@@ -57,3 +57,75 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Structura
+
+src/app/
+├── core/
+│   ├── services/
+│   │   └── ghibli-api.service.ts   // ÚNICO servicio para todas las llamadas a la API
+│   ├── models/
+│   │   ├── film.model.ts           // Interface para la data de Film
+│   │   ├── person.model.ts         // Interface para la data de Person
+│   │   └── ... (y los demás modelos)
+│   └── layout/
+│       ├── header/
+│       │   └── header.component.ts // Componente del encabezado/navbar
+│       └── footer/
+│           └── footer.component.ts // Componente del pie de página
+│
+├── features/
+│   ├── films/
+│   │   ├── films-list/
+│   │   │   └── films-list.component.ts // Componente para mostrar la lista
+│   │   └── films.routes.ts           // Rutas específicas para '/films'
+│   │
+│   ├── people/
+│   │   ├── people-list/
+│   │   │   └── people-list.component.ts
+│   │   └── people.routes.ts
+│   │
+│   └── ... (carpetas para locations, species, vehicles)
+│
+├── shared/
+│   ├── components/
+│   │   └── loading-spinner/      // Componentes reusables (spinner, tarjetas, etc.)
+│   └── pipes/
+│       └── ... (Pipes reusables)
+│
+├── app.config.ts
+├── app.routes.ts                 // Archivo de rutas PRINCIPAL (configura lazy loading)
+├── app.ts                        // Componente principal (App Shell)
+├── app.html                      // Plantilla principal (header, router-outlet, footer)
+└── app.scss
+
+## Commands
+
+# Genera el servicio para manejar las llamadas a la API Ghibli
+ng g s core/services/ghibli-api 
+
+# Genera los componentes para el encabezado y el pie de página
+ng g c core/layout/header --standalone
+ng g c core/layout/footer --standalone
+
+# Feature: Films
+ng g c features/films/films-list --standalone
+
+# Feature: People
+ng g c features/people/people-list --standalone
+
+# Feature: Locations
+ng g c features/locations/locations-list --standalone
+
+# Feature: Species
+ng g c features/species/species-list --standalone
+
+# Feature: Vehicles
+ng g c features/vehicles/vehicles-list --standalone
+
+# Genera un spinner de carga reutilizable
+ng g c shared/components/loading-spinner --standalone
+
+# Generate routes
+touch src/app/features/films/films.routes.ts src/app/features/people/people.routes.ts src/app/features/locations/locations.routes.ts src/app/features/species/species.routes.ts src/app/features/vehicles/vehicles.routes.ts
+
