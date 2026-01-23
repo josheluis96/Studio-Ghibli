@@ -5,8 +5,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { providePrimeNG } from 'primeng/config';
 import Material from '@primeuix/themes/material';
 import { HttpClient,  provideHttpClient } from '@angular/common/http';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 
 
 
@@ -22,14 +21,6 @@ export const appConfig: ApplicationConfig = {
         preset: Material
       }
     }),
-    importProvidersFrom(
-      TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useFactory: (httpClient: HttpClient) => new TranslateHttpLoader(httpClient),
-          deps: [HttpClient],
-        }, defaultLanguage: 'en',
-      })
-    ),
+
   ]
 };
