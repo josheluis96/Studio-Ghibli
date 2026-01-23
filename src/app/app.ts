@@ -1,13 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
 import { Header } from "./core/layout/header/header";
-
 import {
   TranslateService,
-  TranslatePipe,
-  TranslateDirective
+
 } from "@ngx-translate/core";
 
 @Component({
