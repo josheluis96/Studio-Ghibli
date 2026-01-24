@@ -3,8 +3,8 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
-import Material from '@primeuix/themes/material';
-import { HttpClient,  provideHttpClient } from '@angular/common/http';
+import Aura from '@primeuix/themes/aura';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 
 
 
@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     providePrimeNG({
       theme: {
-        preset: Material
+        preset: Aura
       }
     }),
 

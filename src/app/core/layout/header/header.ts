@@ -13,14 +13,18 @@ import { ToolbarModule } from 'primeng/toolbar';
   styleUrl: './header.scss',
 })
 export class Header {
-private router = inject(Router);
+  private router = inject(Router);
+  menuItems = [
+    { label: 'Films', route: 'films', icon: "pi pi-home" },
+    { label: 'People', route: 'people', icon: 'pi pi-video' },
+    { label: 'Locations', route: 'locations', icon: 'pi pi-video' },
+    { label: 'Vehicles', route: 'vehicles', icon: 'pi pi-video' },
+    { label: 'Species', route: 'species', icon: 'pi pi-video' }
+  ];
 
-  navegarfilms() {
-  this.router.navigate(['/films'], { replaceUrl: true });
-}
+  navigatePage(page: String) {
+    this.router.navigate(['/' + page], { replaceUrl: true });
+  }
 
-  navegarPeople() {
-  this.router.navigate(['/people'], { replaceUrl: true });
-}
 
-}
+} 
