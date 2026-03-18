@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, shareReplay } from 'rxjs/operators';
 
-export type ResourceType = 'person' | 'location' | 'vehicle' | 'species';
+export type ResourceType = 'film' | 'person' | 'location' | 'vehicle' | 'species';
 
 export interface ResolvedResource {
   type: ResourceType;
@@ -48,11 +48,13 @@ export class UrlResolverService {
   }
 
   getResourceType(url: string): ResourceType | null {
-    const resourceMatch = url.match(/\/(people|locations|vehicles|species)\//);
+    const resourceMatch = url.match(/\/(films|people|locations|vehicles|species)\//);
     if (!resourceMatch) return null;
 
     const type = resourceMatch[1];
     switch (type) {
+      case 'films':
+        return 'film';
       case 'people':
         return 'person';
       case 'locations':

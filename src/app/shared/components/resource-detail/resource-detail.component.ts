@@ -2,6 +2,7 @@ import { Component, computed, effect, inject } from '@angular/core';
 import { CommonModule, NgComponentOutlet } from '@angular/common';
 import { ModalService } from '../../../core/services/modal.service';
 import { UrlResolverService } from '../../../core/services/url-resolver.service';
+import { FilmDetailComponent } from '../film-detail/film-detail.component';
 import { PersonDetailComponent } from '../person-detail/person-detail.component';
 import { LocationDetailComponent } from '../location-detail/location-detail.component';
 import { VehicleDetailComponent } from '../vehicle-detail/vehicle-detail.component';
@@ -13,6 +14,7 @@ import { SpeciesDetailComponent } from '../species-detail/species-detail.compone
   imports: [
     CommonModule,
     NgComponentOutlet,
+    FilmDetailComponent,
     PersonDetailComponent,
     LocationDetailComponent,
     VehicleDetailComponent,
@@ -63,6 +65,8 @@ export class ResourceDetailComponent {
   protected readonly detailComponent = computed(() => {
     const resourceType = this.modalService.resourceType();
     switch (resourceType) {
+      case 'film':
+        return FilmDetailComponent as any;
       case 'person':
         return PersonDetailComponent as any;
       case 'location':
