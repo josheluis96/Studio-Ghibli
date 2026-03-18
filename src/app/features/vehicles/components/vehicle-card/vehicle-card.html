@@ -1,0 +1,80 @@
+<p-card class="vehicle-card">
+  <ng-template #header>
+    <div class="card-header">
+      <p-avatar
+        [label]="initials()"
+        [style]="{ 'background-color': 'var(--' + avatarColor() + ')' }"
+        shape="circle"
+        size="xlarge"
+        [styleClass]="'text-white font-bold'"
+      ></p-avatar>
+    </div>
+  </ng-template>
+
+  <div class="vehicle-details">
+    <h2 class="vehicle-name">{{ vehicle().name }}</h2>
+
+    <div class="quick-info">
+      <span class="class-badge">{{ vehicle().vehicle_class }}</span>
+    </div>
+
+    <p class="description">{{ vehicle().description }}</p>
+
+    @if (expandedDetails()) {
+    <div class="specs-section">
+      <div class="spec-item">
+        <span class="spec-label">Longitud</span>
+        <span class="spec-value">{{ vehicle().length }} metros</span>
+      </div>
+    </div>
+    }
+
+    <div class="urls-section">
+      <div class="urls-block">
+        <h3 class="urls-title">Piloto</h3>
+        @if (vehicle().pilot) {
+        <a
+          [href]="vehicle().pilot"
+          target="_blank"
+          rel="noopener"
+          class="url-link"
+          >{{ vehicle().pilot }}</a
+        >
+        } @else {
+        <p class="no-data">Sin piloto asignado</p>
+        }
+      </div>
+
+      <div class="urls-block">
+        <h3 class="urls-title">Apariciones en películas</h3>
+        @if (vehicle().films && vehicle().films.length > 0) {
+        <div class="urls-list">
+          @for (filmUrl of vehicle().films; track $index) {
+          <a
+            [href]="filmUrl"
+            target="_blank"
+            rel="noopener"
+            class="url-link"
+            >{{ filmUrl }}</a
+          >
+          }
+        </div>
+        } @else {
+        <p class="no-data">Sin películas asignadas</p>
+        }
+      </div>
+    </div>
+
+    <div class="expand-button-section">
+      <p-button
+        [label]="expandedDetails() ? 'Mostrar menos' : 'Mostrar especificaciones'"
+        (onClick)="toggleDetails()"
+        [text]="true"
+        icon="pi pi-chevron-down"
+        iconPos="right"
+        [class.expanded]="expandedDetails()"
+      >
+      </p-button>
+    </div>
+  </div>
+</p-card>

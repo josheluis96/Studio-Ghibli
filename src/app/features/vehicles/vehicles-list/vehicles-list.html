@@ -1,1 +1,14 @@
-<p>vehicles-list works!</p>
+<div class="container">
+  @if (isLoading()) {
+  <div class="loading">Cargando vehículos...</div>
+  } @else {
+  <div class="vehicles-grid">
+    @for (vehicle of vehicles(); track vehicle.id) {
+    <app-vehicle-card [vehicle]="vehicle"></app-vehicle-card>
+    } @empty {
+    <p>No hay vehículos disponibles en este momento.</p>
+    }
+  </div>
+  }
+</div>
+
