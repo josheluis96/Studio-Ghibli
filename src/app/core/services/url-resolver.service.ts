@@ -32,7 +32,8 @@ export class UrlResolverService {
       return throwError(() => new Error('Invalid URL format'));
     }
 
-    const endpoint = `${this.baseUrl}/${resourceType}/${id}`;
+    const endpointPath = this.getEndpointPath(resourceType);
+    const endpoint = `${this.baseUrl}/${endpointPath}/${id}`;
 
     const request$ = this.http.get<unknown>(endpoint).pipe(
       catchError((error) => {
@@ -45,6 +46,23 @@ export class UrlResolverService {
     this.cache.set(url, request$);
 
     return request$;
+  }
+
+  private getEndpointPath(resourceType: ResourceType): string {
+    switch (resourceType) {
+      case 'film':
+        return 'films';
+      case 'person':
+        return 'people';
+      case 'location':
+        return 'locations';
+      case 'vehicle':
+        return 'vehicles';
+      case 'species':
+        return 'species';
+      default:
+        return resourceType;
+    }
   }
 
   getResourceType(url: string): ResourceType | null {

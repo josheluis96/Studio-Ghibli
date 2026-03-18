@@ -49,10 +49,10 @@ import { ClickableUrlDirective } from '../../directives/clickable-url.directive'
         @if (data().people && data().people.length > 0) {
           <div class="detail-section">
             <h3 class="section-title">Personajes</h3>
-            <div class="links-list">
+            <div class="links-buttons">
               @for (personUrl of data().people; track $index) {
-                <a [href]="personUrl" target="_blank" rel="noopener" class="url-link" appClickableUrl>
-                  {{ personUrl }}
+                <a [href]="personUrl" class="link-button" appClickableUrl title="{{ personUrl }}">
+                  {{ $index + 1 }}
                 </a>
               }
             </div>
@@ -62,10 +62,10 @@ import { ClickableUrlDirective } from '../../directives/clickable-url.directive'
         @if (data().species && data().species.length > 0) {
           <div class="detail-section">
             <h3 class="section-title">Especies</h3>
-            <div class="links-list">
+            <div class="links-buttons">
               @for (speciesUrl of data().species; track $index) {
-                <a [href]="speciesUrl" target="_blank" rel="noopener" class="url-link" appClickableUrl>
-                  {{ speciesUrl }}
+                <a [href]="speciesUrl" class="link-button" appClickableUrl title="{{ speciesUrl }}">
+                  {{ $index + 1 }}
                 </a>
               }
             </div>
@@ -75,11 +75,13 @@ import { ClickableUrlDirective } from '../../directives/clickable-url.directive'
         @if (data().locations && data().locations.length > 0) {
           <div class="detail-section">
             <h3 class="section-title">Locaciones</h3>
-            <div class="links-list">
+            <div class="links-buttons">
               @for (locationUrl of data().locations; track $index) {
-                <a [href]="locationUrl" target="_blank" rel="noopener" class="url-link" appClickableUrl>
-                  {{ locationUrl }}
-                </a>
+                @if (isValidUrl(locationUrl)) {
+                  <a [href]="locationUrl" class="link-button" appClickableUrl title="{{ locationUrl }}">
+                    {{ $index + 1 }}
+                  </a>
+                }
               }
             </div>
           </div>
@@ -88,11 +90,13 @@ import { ClickableUrlDirective } from '../../directives/clickable-url.directive'
         @if (data().vehicles && data().vehicles.length > 0) {
           <div class="detail-section">
             <h3 class="section-title">Vehículos</h3>
-            <div class="links-list">
+            <div class="links-buttons">
               @for (vehicleUrl of data().vehicles; track $index) {
-                <a [href]="vehicleUrl" target="_blank" rel="noopener" class="url-link" appClickableUrl>
-                  {{ vehicleUrl }}
-                </a>
+                @if (isValidUrl(vehicleUrl)) {
+                  <a [href]="vehicleUrl" class="link-button" appClickableUrl title="{{ vehicleUrl }}">
+                    {{ $index + 1 }}
+                  </a>
+                }
               }
             </div>
           </div>
@@ -160,28 +164,46 @@ import { ClickableUrlDirective } from '../../directives/clickable-url.directive'
         line-height: 1.6;
       }
 
-      .links-list {
+      .links-buttons {
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
         gap: 0.5rem;
       }
 
-      .url-link {
-        color: var(--primary-color);
+      .link-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 36px;
+        height: 36px;
+        padding: 0 0.75rem;
+        background-color: var(--primary-color);
+        color: white;
         text-decoration: none;
-        word-break: break-all;
-        padding: 0.5rem;
-        border-radius: 4px;
-        transition: background-color 0.2s;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+        cursor: pointer;
       }
 
-      .url-link:hover {
-        background-color: var(--primary-50);
-        text-decoration: underline;
+      .link-button:hover {
+        background-color: var(--primary-600);
+        transform: scale(1.05);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .link-button:active {
+        transform: scale(0.98);
       }
     `,
   ],
 })
 export class FilmDetailComponent {
   data = input.required<Film>();
+
+  isValidUrl(url: string): boolean {
+    // Check if URL has an ID (not ending with just /locations/ or /vehicles/)
+    return !!url && !url.endsWith('/');
+  }
 }

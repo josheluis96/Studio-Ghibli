@@ -33,10 +33,10 @@ import { ClickableUrlDirective } from '../../directives/clickable-url.directive'
 
         <div class="detail-section" *ngIf="data().films && data().films.length > 0">
           <h3 class="section-title">Películas</h3>
-          <div class="links-list">
+          <div class="links-buttons">
             @for (filmUrl of data().films; track $index) {
-              <a [href]="filmUrl" target="_blank" rel="noopener" class="url-link" appClickableUrl>
-                {{ filmUrl }}
+              <a [href]="filmUrl" class="link-button" appClickableUrl title="{{ filmUrl }}">
+                {{ $index + 1 }}
               </a>
             }
           </div>
@@ -93,23 +93,35 @@ import { ClickableUrlDirective } from '../../directives/clickable-url.directive'
 
       .links-list {
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
         gap: 0.5rem;
       }
 
-      .url-link {
-        color: var(--primary-color);
+      .link-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 36px;
+        height: 36px;
+        padding: 0 0.75rem;
+        background-color: var(--primary-color);
+        color: white;
         text-decoration: none;
-        word-break: break-all;
-        padding: 0.5rem;
-        border-radius: 4px;
-        transition: background-color 0.2s;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.2s;
         cursor: pointer;
       }
 
-      .url-link:hover {
-        background-color: var(--primary-50);
-        text-decoration: underline;
+      .link-button:hover {
+        background-color: var(--primary-600);
+        transform: scale(1.05);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .link-button:active {
+        transform: scale(0.98);
       }
     `,
   ],
