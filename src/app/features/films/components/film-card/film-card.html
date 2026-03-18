@@ -28,8 +28,37 @@
                     <div class="flex flex-column">
                         <span class="text-500 font-semibold text-xs uppercase">Productor</span>
                         <span class="text-900 font-medium">{{ film().producer }}</span>
-                    </div>
+            </div>
+         </div>
+
+        <div class="col-12 mt-4">
+            @if (expandedPeople()) {
+            <div class="people-section">
+                <h3 class="people-title">Personas ({{ film().people.length }})</h3>
+                @if (film().people.length > 0) {
+                <div class="people-list">
+                    @for (personUrl of film().people; track $index) {
+                    <a [href]="personUrl" target="_blank" rel="noopener" class="url-link" appClickableUrl>
+                        {{ personUrl }}
+                    </a>
+                    }
                 </div>
+                } @else {
+                <p class="no-data">Sin personas asignadas</p>
+                }
+            </div>
+            }
+
+            <div class="action-buttons">
+                <p-button
+                    [label]="expandedPeople() ? 'Ocultar personas' : 'Mostrar personas'"
+                    (onClick)="togglePeople()"
+                    [text]="true"
+                    icon="pi pi-chevron-down"
+                    iconPos="right"
+                    [class.expanded]="expandedPeople()"
+                >
+                </p-button>
             </div>
         </div>
 

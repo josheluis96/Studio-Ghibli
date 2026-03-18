@@ -1,16 +1,4 @@
 <p-card class="species-card">
-  <ng-template #header>
-    <div class="card-header">
-      <p-avatar
-        [label]="initials()"
-        [style]="{ 'background-color': 'var(--' + avatarColor() + ')' }"
-        shape="circle"
-        size="xlarge"
-        [styleClass]="'text-white font-bold'"
-      ></p-avatar>
-    </div>
-  </ng-template>
-
   <div class="species-details">
     <h2 class="species-name">{{ species().name }}</h2>
 
@@ -53,7 +41,7 @@
         @if (species().people.length > 0) {
         <div class="links-list">
           @for (personUrl of species().people; track $index) {
-          <a [href]="personUrl" target="_blank" rel="noopener" class="url-link">
+          <a [href]="personUrl" target="_blank" rel="noopener" class="url-link" appClickableUrl>
             {{ personUrl }}
           </a>
           }
@@ -68,7 +56,7 @@
         @if (species().films.length > 0) {
         <div class="links-list">
           @for (filmUrl of species().films; track $index) {
-          <a [href]="filmUrl" target="_blank" rel="noopener" class="url-link">
+          <a [href]="filmUrl" target="_blank" rel="noopener" class="url-link" appClickableUrl>
             {{ filmUrl }}
           </a>
           }

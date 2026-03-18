@@ -2,14 +2,13 @@ import { Component, computed, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Vehicle } from '../../../../core/models/vehicle.model';
 import { CardModule } from 'primeng/card';
-import { AvatarModule } from 'primeng/avatar';
-import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
+import { ClickableUrlDirective } from '../../../../shared/directives/clickable-url.directive';
 
 @Component({
   selector: 'app-vehicle-card',
   standalone: true,
-  imports: [CommonModule, CardModule, AvatarModule, DividerModule, ButtonModule],
+  imports: [CommonModule, CardModule, ButtonModule, ClickableUrlDirective],
   templateUrl: './vehicle-card.html',
   styleUrl: './vehicle-card.scss',
 })
@@ -36,13 +35,8 @@ export class VehicleCard {
     return this.colors[hash % this.colors.length];
   });
 
-  protected readonly initials = computed(() => {
-    const name = this.vehicle().name;
-    const parts = name.split(' ');
-    return parts.map((part) => part.charAt(0)).join('').toUpperCase();
-  });
-
   toggleDetails(): void {
     this.expandedDetails.update((v) => !v);
   }
 }
+

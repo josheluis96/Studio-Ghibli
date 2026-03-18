@@ -2,13 +2,13 @@ import { Component, computed, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Species } from '../../../../core/models/species.model';
 import { CardModule } from 'primeng/card';
-import { AvatarModule } from 'primeng/avatar';
 import { ButtonModule } from 'primeng/button';
+import { ClickableUrlDirective } from '../../../../shared/directives/clickable-url.directive';
 
 @Component({
   selector: 'app-species-card',
   standalone: true,
-  imports: [CommonModule, CardModule, AvatarModule, ButtonModule],
+  imports: [CommonModule, CardModule, ButtonModule, ClickableUrlDirective],
   templateUrl: './species-card.html',
   styleUrl: './species-card.scss',
 })
@@ -44,12 +44,6 @@ export class SpeciesCard {
       return acc + char.charCodeAt(0);
     }, 0);
     return this.avatarColors[hash % this.avatarColors.length];
-  });
-
-  protected readonly initials = computed(() => {
-    const name = this.species().name;
-    const parts = name.split(' ');
-    return parts.map((part) => part.charAt(0)).join('').toUpperCase();
   });
 
   protected readonly classificationColor = computed(() => {

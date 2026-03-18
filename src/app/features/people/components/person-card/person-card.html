@@ -1,0 +1,49 @@
+<p-card class="person-card">
+  <div class="person-details">
+    <h2 class="person-name">{{ person().name }}</h2>
+
+    <div class="details-grid">
+      <div class="detail-item">
+        <span class="detail-label">Género</span>
+        <span class="detail-value">{{ person().gender }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Edad</span>
+        <span class="detail-value">{{ person().age === 'UNKNOWN' ? 'Desconocida' : person().age }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Color de Ojos</span>
+        <span class="detail-value">{{ person().eye_color }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Color de Cabello</span>
+        <span class="detail-value">{{ person().hair_color }}</span>
+      </div>
+    </div>
+
+    <div class="urls-section">
+      <div class="urls-block">
+        <h3 class="urls-title">Películas</h3>
+        @if (person().films && person().films.length > 0) {
+        <div class="urls-list">
+          @for (filmUrl of person().films; track $index) {
+          <a [href]="filmUrl" target="_blank" rel="noopener" class="url-link" appClickableUrl>{{ filmUrl }}</a>
+          }
+        </div>
+        } @else {
+        <p class="no-data">Sin películas asignadas</p>
+        }
+      </div>
+
+      <div class="urls-block">
+        <h3 class="urls-title">Especie</h3>
+        @if (person().species) {
+        <a [href]="person().species" target="_blank" rel="noopener" class="url-link" appClickableUrl>{{ person().species }}</a>
+        } @else {
+        <p class="no-data">Sin especie asignada</p>
+        }
+      </div>
+    </div>
+  </div>
+</p-card>
+
