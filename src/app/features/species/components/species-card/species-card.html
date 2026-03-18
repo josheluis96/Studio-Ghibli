@@ -1,0 +1,105 @@
+<p-card class="species-card">
+  <ng-template #header>
+    <div class="card-header">
+      <p-avatar
+        [label]="initials()"
+        [style]="{ 'background-color': 'var(--' + avatarColor() + ')' }"
+        shape="circle"
+        size="xlarge"
+        [styleClass]="'text-white font-bold'"
+      ></p-avatar>
+    </div>
+  </ng-template>
+
+  <div class="species-details">
+    <h2 class="species-name">{{ species().name }}</h2>
+
+    <div class="classification-badge" [style.background-color]="classificationColor()">
+      {{ species().classification }}
+    </div>
+
+    @if (expandedColors()) {
+    <div class="colors-section">
+      <div class="color-group">
+        <h3 class="color-group-title">Eye Colors</h3>
+        <div class="color-badges">
+          @for (color of eyeColorsList(); track $index) {
+          <span class="color-badge" [style.--color]="getColorCode(color)">
+            <span class="color-dot"></span>
+            {{ color }}
+          </span>
+          }
+        </div>
+      </div>
+
+      <div class="color-group">
+        <h3 class="color-group-title">Hair Colors</h3>
+        <div class="color-badges">
+          @for (color of hairColorsList(); track $index) {
+          <span class="color-badge" [style.--color]="getColorCode(color)">
+            <span class="color-dot"></span>
+            {{ color }}
+          </span>
+          }
+        </div>
+      </div>
+    </div>
+    }
+
+    @if (expandedLinks()) {
+    <div class="links-section">
+      <div class="link-group">
+        <h3 class="link-group-title">People ({{ species().people.length }})</h3>
+        @if (species().people.length > 0) {
+        <div class="links-list">
+          @for (personUrl of species().people; track $index) {
+          <a [href]="personUrl" target="_blank" rel="noopener" class="url-link">
+            {{ personUrl }}
+          </a>
+          }
+        </div>
+        } @else {
+        <p class="no-data">Sin personas asignadas</p>
+        }
+      </div>
+
+      <div class="link-group">
+        <h3 class="link-group-title">Films ({{ species().films.length }})</h3>
+        @if (species().films.length > 0) {
+        <div class="links-list">
+          @for (filmUrl of species().films; track $index) {
+          <a [href]="filmUrl" target="_blank" rel="noopener" class="url-link">
+            {{ filmUrl }}
+          </a>
+          }
+        </div>
+        } @else {
+        <p class="no-data">Sin películas asignadas</p>
+        }
+      </div>
+    </div>
+    }
+
+    <div class="action-buttons">
+      <p-button
+        [label]="expandedColors() ? 'Ocultar colores' : 'Mostrar colores'"
+        (onClick)="toggleColors()"
+        [text]="true"
+        icon="pi pi-chevron-down"
+        iconPos="right"
+        [class.expanded]="expandedColors()"
+      >
+      </p-button>
+
+      <p-button
+        [label]="expandedLinks() ? 'Ocultar relaciones' : 'Mostrar relaciones'"
+        (onClick)="toggleLinks()"
+        [text]="true"
+        icon="pi pi-chevron-down"
+        iconPos="right"
+        [class.expanded]="expandedLinks()"
+      >
+      </p-button>
+    </div>
+  </div>
+</p-card>

@@ -1,1 +1,14 @@
-<p>species-list works!</p>
+<div class="container">
+  @if (isLoading()) {
+  <div class="loading">Cargando especies...</div>
+  } @else {
+  <div class="species-grid">
+    @for (specie of species(); track specie.id) {
+    <app-species-card [species]="specie"></app-species-card>
+    } @empty {
+    <p>No hay especies disponibles en este momento.</p>
+    }
+  </div>
+  }
+</div>
+

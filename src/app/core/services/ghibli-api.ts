@@ -5,6 +5,7 @@ import { Film } from '../models/film.model';
 import { Person } from '../models/person.model';
 import { LocationData } from '../models/location.model';
 import { Vehicle } from '../models/vehicle.model';
+import { Species } from '../models/species.model';
 
 @Injectable({
   providedIn: 'root',
@@ -38,8 +39,8 @@ export class GhibliApi {
   getLocations(): Observable<LocationData[]> {
     return this.http.get<LocationData[]>(`${this.baseUrl}/locations`);
   }
-  getSpecies(): Observable<Film[]> {
-    return this.http.get<Film[]>(`${this.baseUrl}/species`);
+  getSpecies(): Observable<Species[]> {
+    return this.http.get<Species[]>(`${this.baseUrl}/species`);
   }
   getVehicles(): Observable<Vehicle[]> {
     return this.http.get<Vehicle[]>(`${this.baseUrl}/vehicles`);
