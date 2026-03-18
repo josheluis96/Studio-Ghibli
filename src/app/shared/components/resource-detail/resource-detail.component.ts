@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, Type } from '@angular/core';
+import { Component, computed, effect, inject, Type } from '@angular/core';
 import { CommonModule, NgComponentOutlet } from '@angular/common';
 import { ModalService } from '../../../core/services/modal.service';
 import { UrlResolverService } from '../../../core/services/url-resolver.service';
@@ -56,7 +56,7 @@ import { SpeciesDetailComponent } from '../species-detail/species-detail.compone
     `,
   ],
 })
-export class ResourceDetailComponent implements OnInit {
+export class ResourceDetailComponent {
   protected readonly modalService = inject(ModalService);
   private readonly urlResolverService = inject(UrlResolverService);
 
@@ -76,18 +76,20 @@ export class ResourceDetailComponent implements OnInit {
     }
   });
 
-  ngOnInit(): void {
-    const url = this.modalService.currentUrl();
-    if (!url) return;
+  constructor() {
+    effect(() => {
+      const url = this.modalService.currentUrl();
+      if (!url) return;
 
-    this.urlResolverService.resolveUrl(url).subscribe({
-      next: (data) => {
-        this.modalService.setData(data);
-      },
-      error: (error) => {
-        this.modalService.setError('No se pudieron cargar los detalles');
-        console.error(error);
-      },
+      this.urlResolverService.resolveUrl(url).subscribe({
+        next: (data) => {
+          this.modalService.setData(data);
+        },
+        error: (error) => {
+          this.modalService.setError('No se pudieron cargar los detalles');
+          console.error(error);
+        },
+      });
     });
   }
 }
