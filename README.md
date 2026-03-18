@@ -111,6 +111,7 @@ ng g c core/layout/footer --standalone
 # Feature: Films
 ng g c features/films/films-list --standalone
 ng g c features/films/components/film-card --standalone
+ng g c features/films/components/film-tree --standalone
 
 # Feature: People
 ng g c features/people/people-list --standalone
