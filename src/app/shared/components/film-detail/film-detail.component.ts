@@ -51,7 +51,7 @@ import { ClickableUrlDirective } from '../../directives/clickable-url.directive'
             <h3 class="section-title">Personajes</h3>
             <div class="links-buttons">
               @for (personUrl of data().people; track $index) {
-                <a [href]="personUrl" class="link-button" appClickableUrl title="{{ personUrl }}">
+                <a [href]="personUrl" class="link-button" appClickableUrl>
                   {{ $index + 1 }}
                 </a>
               }
@@ -64,7 +64,7 @@ import { ClickableUrlDirective } from '../../directives/clickable-url.directive'
             <h3 class="section-title">Especies</h3>
             <div class="links-buttons">
               @for (speciesUrl of data().species; track $index) {
-                <a [href]="speciesUrl" class="link-button" appClickableUrl title="{{ speciesUrl }}">
+                <a [href]="speciesUrl" class="link-button" appClickableUrl>
                   {{ $index + 1 }}
                 </a>
               }
@@ -78,7 +78,7 @@ import { ClickableUrlDirective } from '../../directives/clickable-url.directive'
             <div class="links-buttons">
               @for (locationUrl of data().locations; track $index) {
                 @if (isValidUrl(locationUrl)) {
-                  <a [href]="locationUrl" class="link-button" appClickableUrl title="{{ locationUrl }}">
+                  <a [href]="locationUrl" class="link-button" appClickableUrl>
                     {{ $index + 1 }}
                   </a>
                 }
@@ -93,7 +93,7 @@ import { ClickableUrlDirective } from '../../directives/clickable-url.directive'
             <div class="links-buttons">
               @for (vehicleUrl of data().vehicles; track $index) {
                 @if (isValidUrl(vehicleUrl)) {
-                  <a [href]="vehicleUrl" class="link-button" appClickableUrl title="{{ vehicleUrl }}">
+                  <a [href]="vehicleUrl" class="link-button" appClickableUrl>
                     {{ $index + 1 }}
                   </a>
                 }
@@ -167,7 +167,7 @@ import { ClickableUrlDirective } from '../../directives/clickable-url.directive'
       .links-buttons {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.5rem;
+        gap: 1rem;
       }
 
       .link-button {

@@ -31,7 +31,7 @@ import { ClickableUrlDirective } from '../../directives/clickable-url.directive'
           <h3 class="section-title">Personas</h3>
           <div class="links-buttons">
             @for (personUrl of data().people; track $index) {
-              <a [href]="personUrl" class="link-button" appClickableUrl title="{{ personUrl }}">
+              <a [href]="personUrl" class="link-button" appClickableUrl>
                 {{ $index + 1 }}
               </a>
             }
@@ -42,7 +42,7 @@ import { ClickableUrlDirective } from '../../directives/clickable-url.directive'
           <h3 class="section-title">Películas</h3>
           <div class="links-buttons">
             @for (filmUrl of data().films; track $index) {
-              <a [href]="filmUrl" class="link-button" appClickableUrl title="{{ filmUrl }}">
+              <a [href]="filmUrl" class="link-button" appClickableUrl>
                 {{ $index + 1 }}
               </a>
             }
@@ -101,7 +101,7 @@ import { ClickableUrlDirective } from '../../directives/clickable-url.directive'
       .links-list {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.5rem;
+        gap: 1rem;
       }
 
       .link-button {
