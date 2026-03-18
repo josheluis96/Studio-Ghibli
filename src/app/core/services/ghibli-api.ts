@@ -18,17 +18,21 @@ export class GhibliApi {
   getFilmById(id: string): Observable<Film> {
     return this.http.get<Film>(`${this.baseUrl}/films/${id}`);
   }
-  getPeopleId(id: string): Observable<Film[]> {
-    return this.http.get<Film[]>(`${this.baseUrl}/people${id}`);
+
+  getPersonById(id: string): Observable<Person> {
+    return this.http.get<Person>(`${this.baseUrl}/people/${id}`);
   }
-  getLocationId(id: string): Observable<Film[]> {
-    return this.http.get<Film[]>(`${this.baseUrl}/locations${id}`);
+
+  getLocationById(id: string): Observable<LocationData> {
+    return this.http.get<LocationData>(`${this.baseUrl}/locations/${id}`);
   }
-  getSpecieId(id: string): Observable<Film[]> {
-    return this.http.get<Film[]>(`${this.baseUrl}/species${id}`);
+
+  getSpeciesById(id: string): Observable<Species> {
+    return this.http.get<Species>(`${this.baseUrl}/species/${id}`);
   }
-  getVehicleId(id: string): Observable<Film[]> {
-    return this.http.get<Film[]>(`${this.baseUrl}/vehicles${id}`);
+
+  getVehicleById(id: string): Observable<Vehicle> {
+    return this.http.get<Vehicle>(`${this.baseUrl}/vehicles/${id}`);
   }
   getFilms(): Observable<Film[]> {
     return this.http.get<Film[]>(`${this.baseUrl}/films`);

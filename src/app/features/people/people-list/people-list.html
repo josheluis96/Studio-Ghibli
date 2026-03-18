@@ -1,6 +1,11 @@
 <div class="container">
   @if (isLoading()) {
   <div class="loading">Cargando personas...</div>
+  } @else if (error()) {
+  <div class="error-container">
+    <p class="error-message">{{ error() }}</p>
+    <button pButton type="button" label="Reintentar" (click)="retry()" class="p-button-primary"></button>
+  </div>
   } @else {
   <div class="people-grid">
     @for (person of people(); track person.id) {

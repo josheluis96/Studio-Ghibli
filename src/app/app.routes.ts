@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'films', pathMatch: 'full' },
@@ -21,5 +22,6 @@ export const routes: Routes = [
     {
         path: 'vehicles',
         loadChildren: () => import('./features/vehicles/vehicles.routes').then(m => m.VEHICLES_ROUTES)
-    }
+    },
+    { path: '**', component: NotFoundComponent }
 ];
