@@ -21,11 +21,22 @@ export class ClickableUrlDirective {
     const target = event.target as HTMLAnchorElement;
     const url = target.getAttribute('href');
 
-    if (!url) return;
+    console.log('Clicked URL:', url);
+
+    if (!url) {
+      console.warn('No URL found');
+      return;
+    }
 
     const resourceType = this.urlResolverService.getResourceType(url);
-    if (!resourceType) return;
+    console.log('Resource type:', resourceType);
+    
+    if (!resourceType) {
+      console.warn('Could not determine resource type for URL:', url);
+      return;
+    }
 
+    console.log('Opening modal for:', resourceType, 'URL:', url);
     this.modalService.openModal(url, resourceType);
   }
 }

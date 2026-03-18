@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, Type } from '@angular/core';
+import { Component, computed, effect, inject } from '@angular/core';
 import { CommonModule, NgComponentOutlet } from '@angular/common';
 import { ModalService } from '../../../core/services/modal.service';
 import { UrlResolverService } from '../../../core/services/url-resolver.service';
@@ -13,7 +13,6 @@ import { SpeciesDetailComponent } from '../species-detail/species-detail.compone
   imports: [
     CommonModule,
     NgComponentOutlet,
-    // Imported for dynamic rendering in NgComponentOutlet
     PersonDetailComponent,
     LocationDetailComponent,
     VehicleDetailComponent,
@@ -27,9 +26,10 @@ import { SpeciesDetailComponent } from '../species-detail/species-detail.compone
         <div class="error">
           <p>{{ modalService.error() }}</p>
         </div>
-      } @else if (modalService.currentData()) {
+      } @else if (modalService.currentData() && detailComponent()) {
         <ng-container
-          *ngComponentOutlet="detailComponent(); inputs: { data: modalService.currentData() }"
+          [ngComponentOutlet]="detailComponent()"
+          [ngComponentOutletInputs]="componentInputs()"
         ></ng-container>
       }
     </div>
@@ -64,16 +64,21 @@ export class ResourceDetailComponent {
     const resourceType = this.modalService.resourceType();
     switch (resourceType) {
       case 'person':
-        return PersonDetailComponent as unknown as Type<any>;
+        return PersonDetailComponent as any;
       case 'location':
-        return LocationDetailComponent as unknown as Type<any>;
+        return LocationDetailComponent as any;
       case 'vehicle':
-        return VehicleDetailComponent as unknown as Type<any>;
+        return VehicleDetailComponent as any;
       case 'species':
-        return SpeciesDetailComponent as unknown as Type<any>;
+        return SpeciesDetailComponent as any;
       default:
-        return null as unknown as Type<any>;
+        return null;
     }
+  });
+
+  protected readonly componentInputs = computed(() => {
+    const data = this.modalService.currentData();
+    return { data } as Record<string, any>;
   });
 
   constructor() {
