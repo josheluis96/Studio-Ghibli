@@ -22,22 +22,17 @@ export class UrlResolverService {
   resolveUrl(url: string): Observable<unknown> {
     // Return cached result if available
     if (this.cache.has(url)) {
-      console.log('Using cached result for:', url);
       return this.cache.get(url)!;
     }
 
     const resourceType = this.getResourceType(url);
     const id = this.extractIdFromUrl(url);
 
-    console.log('Resolving URL:', url, 'Type:', resourceType, 'ID:', id);
-
     if (!resourceType || !id) {
-      console.error('Invalid URL format:', url);
       return throwError(() => new Error('Invalid URL format'));
     }
 
     const endpoint = `${this.baseUrl}/${resourceType}/${id}`;
-    console.log('Calling endpoint:', endpoint);
 
     const request$ = this.http.get<unknown>(endpoint).pipe(
       catchError((error) => {
