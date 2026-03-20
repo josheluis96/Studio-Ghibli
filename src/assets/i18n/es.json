@@ -1,0 +1,9 @@
+{
+    "MENU": {
+        "FILMS": "Películas",
+        "PEOPLE": "Personajes",
+        "LOCATIONS": "Lugares",
+        "SPECIES": "Especies",
+        "VEHICLES": "Vehículos"
+    }
+}

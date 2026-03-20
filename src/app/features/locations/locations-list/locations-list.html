@@ -1,0 +1,18 @@
+<div class="container">
+  @if (isLoading()) {
+  <div class="loading">Cargando locaciones...</div>
+  } @else if (error()) {
+  <div class="error-container">
+    <p class="error-message">{{ error() }}</p>
+    <button pButton type="button" label="Reintentar" (click)="retry()" class="p-button-primary"></button>
+  </div>
+  } @else {
+  <div class="locations-grid">
+    @for (location of locations(); track location.id) {
+    <app-location-card [location]="location"></app-location-card>
+    } @empty {
+    <p>No hay locaciones disponibles en este momento.</p>
+    }
+  </div>
+  }
+</div>

@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+/* src/styles.scss */
+:root {
+    --font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Forzar a los componentes de PrimeNG a usar la fuente global */
+.p-component {
+    font-family: var(--font-family) !important;
+}

@@ -1,0 +1,9 @@
+{
+    "MENU": {
+        "FILMS": "Films",
+        "PEOPLE": "People",
+        "LOCATIONS": "Locations",
+        "SPECIES": "Species",
+        "VEHICLES": "Vehicles"
+    }
+}

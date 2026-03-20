@@ -1,0 +1,19 @@
+<div class="container">
+  @if (isLoading()) {
+  <div class="loading">Cargando vehículos...</div>
+  } @else if (error()) {
+  <div class="error-container">
+    <p class="error-message">{{ error() }}</p>
+    <button pButton type="button" label="Reintentar" (click)="retry()" class="p-button-primary"></button>
+  </div>
+  } @else {
+  <div class="vehicles-grid">
+    @for (vehicle of vehicles(); track vehicle.id) {
+    <app-vehicle-card [vehicle]="vehicle"></app-vehicle-card>
+    } @empty {
+    <p>No hay vehículos disponibles en este momento.</p>
+    }
+  </div>
+  }
+</div>
+

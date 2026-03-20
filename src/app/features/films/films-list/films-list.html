@@ -1,0 +1,19 @@
+<div class="container">
+
+    @if (isLoading()) {
+    <div class="loading">Cargando películas...</div>
+    } @else if (error()) {
+    <div class="error-container">
+      <p class="error-message">{{ error() }}</p>
+      <button pButton type="button" label="Reintentar" (click)="retry()" class="p-button-primary"></button>
+    </div>
+    } @else {
+    <div class="films-grid">
+        @for (film of films(); track film.id) {
+        <app-film-card [film]="film"></app-film-card>
+        } @empty {
+        <p>No hay películas disponibles en este momento.</p>
+        }
+    </div>
+    }
+</div>

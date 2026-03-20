@@ -1,0 +1,49 @@
+<p-card class="location-card">
+  <div class="location-details">
+    <h2 class="location-name">{{ location().name }}</h2>
+
+    <div class="details-grid">
+      <div class="detail-item">
+        <span class="detail-label">Clima</span>
+        <span class="detail-value">{{ location().climate }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Terreno</span>
+        <span class="detail-value">{{ location().terrain }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Agua Superficial</span>
+        <span class="detail-value">{{ location().surface_water }}%</span>
+      </div>
+    </div>
+
+    <div class="urls-section">
+      <div class="urls-block">
+        <h3 class="urls-title">Residentes</h3>
+        @if (location().residents && location().residents.length > 0) {
+        <div class="urls-list">
+          @for (residentUrl of location().residents; track $index) {
+          <a [href]="residentUrl" target="_blank" rel="noopener" class="url-link" appClickableUrl>{{ residentUrl }}</a>
+          }
+        </div>
+        } @else {
+        <p class="no-data">Sin residentes asignados</p>
+        }
+      </div>
+
+      <div class="urls-block">
+        <h3 class="urls-title">Películas</h3>
+        @if (location().films && location().films.length > 0) {
+        <div class="urls-list">
+          @for (filmUrl of location().films; track $index) {
+          <a [href]="filmUrl" target="_blank" rel="noopener" class="url-link" appClickableUrl>{{ filmUrl }}</a>
+          }
+        </div>
+        } @else {
+        <p class="no-data">Sin películas asignadas</p>
+        }
+      </div>
+    </div>
+  </div>
+</p-card>
+

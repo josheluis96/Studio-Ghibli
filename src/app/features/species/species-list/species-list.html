@@ -1,0 +1,19 @@
+<div class="container">
+  @if (isLoading()) {
+  <div class="loading">Cargando especies...</div>
+  } @else if (error()) {
+  <div class="error-container">
+    <p class="error-message">{{ error() }}</p>
+    <button pButton type="button" label="Reintentar" (click)="retry()" class="p-button-primary"></button>
+  </div>
+  } @else {
+  <div class="species-grid">
+    @for (specie of species(); track specie.id) {
+    <app-species-card [species]="specie"></app-species-card>
+    } @empty {
+    <p>No hay especies disponibles en este momento.</p>
+    }
+  </div>
+  }
+</div>
+
